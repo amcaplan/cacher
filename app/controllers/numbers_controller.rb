@@ -1,9 +1,12 @@
 class NumbersController < ApplicationController
   def index
-    number = Rails.cache.fetch('number') do
-      rand(1_000_000)
+    hash = Rails.cache.fetch('hash') do
+      {
+        number: rand(1_000_000),
+        generated: Time.now
+      }
     end
 
-    render json: number
+    render json: hash
   end
 end
